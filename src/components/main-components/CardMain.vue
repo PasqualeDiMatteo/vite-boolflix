@@ -5,6 +5,12 @@ export default {
         originalTitle: String,
         language: String,
         vote: Number,
+    },
+    methods: {
+        getImagePath(language) {
+            const url = new URL(`../../assets/img/${language}.png`, import.meta.url)
+            return url.href
+        }
     }
 }
 </script>
@@ -16,7 +22,7 @@ export default {
         <ol>
             <li>{{ title }}</li>
             <li>{{ originalTitle }}</li>
-            <li>{{ language }}</li>
+            <li><img :src="getImagePath(language)" :alt="language"></li>
             <li>{{ vote }}</li>
         </ol>
     </div>
@@ -27,5 +33,9 @@ export default {
 <style scoped lang="scss">
 li {
     color: white;
+}
+
+img {
+    width: 200px;
 }
 </style>
