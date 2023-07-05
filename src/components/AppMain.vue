@@ -15,9 +15,15 @@ export default {
 <template>
     <main>
         <div class="container">
-            <div class="row">
+            <h2>Movies</h2>
+            <div class="row row-cols-3">
                 <CardMain v-for="movie in store.movies" :title="movie.title" :originalTitle="movie.original_title"
                     :language="movie.original_language" :vote="movie.vote_average" />
+            </div>
+            <h2>TV Series</h2>
+            <div class="row row-cols-3">
+                <CardMain v-for="tv in store.tvSeries" :title="tv.name" :originalTitle="tv.original_name"
+                    :language="tv.original_language" :vote="tv.vote_average" />
             </div>
         </div>
     </main>
@@ -27,5 +33,6 @@ export default {
 main {
     height: 90vh;
     background-color: #434343;
+    overflow: auto;
 }
 </style>
