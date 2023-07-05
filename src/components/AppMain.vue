@@ -18,12 +18,13 @@ export default {
         <div class="container">
             <h2 v-if="store.movies.length">Movies</h2>
             <div class="row row-cols-3">
-                <CardMain v-for="movie in store.movies" :title="movie.title" :originalTitle="movie.original_title"
-                    :language="movie.original_language" :vote="movie.vote_average" :img="this.url + movie.poster_path" />
+                <CardMain v-for="movie in store.movies" :key="movie.id" :title="movie.title"
+                    :originalTitle="movie.original_title" :language="movie.original_language" :vote="movie.vote_average"
+                    :img="this.url + movie.poster_path" />
             </div>
             <h2 v-if="store.tvSeries.length">TV Series</h2>
             <div class="row row-cols-3">
-                <CardMain v-for=" tv  in  store.tvSeries " :title="tv.name" :originalTitle="tv.original_name"
+                <CardMain v-for=" tv  in  store.tvSeries " :key="tv.id" :title="tv.name" :originalTitle="tv.original_name"
                     :language="tv.original_language" :vote="tv.vote_average" :img="this.url + tv.poster_path" />
             </div>
         </div>
