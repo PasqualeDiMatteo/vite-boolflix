@@ -2,6 +2,7 @@
 const endpoint = "https://api.themoviedb.org/3/search"
 
 import axios from "axios"
+import AppHeader from "./components/AppHeader.vue"
 import { store } from "./assets/data/store"
 
 
@@ -21,11 +22,14 @@ export default {
   },
   created() {
     this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=anelli`)
-  }
+  },
+  components: { AppHeader }
 }
 </script>
 
-<template></template>
+<template>
+  <AppHeader />
+</template>
 
 
 <style lang="scss">
