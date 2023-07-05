@@ -5,6 +5,7 @@ export default {
         originalTitle: String,
         language: String,
         vote: Number,
+        img: String
     },
     methods: {
         getImagePath(language) {
@@ -20,6 +21,7 @@ export default {
 <template>
     <div class="col">
         <ol>
+            <img :src="img" :alt="title">
             <li>{{ title }}</li>
             <li>{{ originalTitle }}</li>
             <li><img :src="getImagePath(language)" :alt="language"></li>
