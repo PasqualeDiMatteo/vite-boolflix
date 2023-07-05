@@ -15,9 +15,9 @@ export default {
     }
   },
   methods: {
-    fetchMovie(url) {
+    fetchMovie(url, party) {
       axios.get(url).then(res => {
-        store.movies = res.data.results
+        store[party] = res.data.results
         console.log(res.data.results)
       })
     },
@@ -25,7 +25,9 @@ export default {
       this.searchName = searchTerm
     },
     onClickSubmit() {
-      this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}`)
+      this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}`, ["movies"])
+      this.fetchMovie(`${endpoint}/tv?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}`, ["tvSeries"])
+
     }
   },
   components: { AppHeader, AppMain }
