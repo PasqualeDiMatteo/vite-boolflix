@@ -6,10 +6,13 @@ export default {
         return {
         }
     },
-    emits: ["term-search"],
+    emits: ["term-search", "click-submit"],
     methods: {
         onTermChange(searchTerm) {
             this.$emit("term-search", searchTerm)
+        },
+        searchTerm() {
+            this.$emit("click-submit")
         }
     }
 }
@@ -19,7 +22,7 @@ export default {
     <header>
         <div class="container d-flex justify-content-between py-3">
             <h1>BOOLFLIX</h1>
-            <SearchName @term-change="onTermChange" />
+            <SearchName @term-change="onTermChange" @click-submit="searchTerm" />
         </div>
     </header>
 </template>

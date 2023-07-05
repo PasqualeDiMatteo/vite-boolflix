@@ -5,14 +5,14 @@ export default {
             searchTerm: ""
         }
     },
-    emits: ["term-change", "form-submit"]
+    emits: ["term-change", "click-submit"]
 }
 
 </script>
 
 <template>
     <nav>
-        <form @submit.prevent="$emit('form-submit')">
+        <form @submit.prevent="$emit('click-submit')">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Cerca..." v-model.trim="searchTerm"
                     @keyup="$emit('term-change', searchTerm)">

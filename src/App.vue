@@ -23,17 +23,17 @@ export default {
     },
     filteredName(searchTerm) {
       this.searchName = searchTerm
+    },
+    onClickSubmit() {
+      this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}`)
     }
-  },
-  created() {
-    this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=anelli`)
   },
   components: { AppHeader, AppMain }
 }
 </script>
 
 <template>
-  <AppHeader @term-search="filteredName" />
+  <AppHeader @term-search="filteredName" @click-submit="onClickSubmit" />
   <AppMain />
 </template>
 
