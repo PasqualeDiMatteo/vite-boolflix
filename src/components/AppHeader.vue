@@ -1,7 +1,17 @@
 <script>
 import SearchName from "./header_components/SearchName.vue"
 export default {
-    components: { SearchName }
+    components: { SearchName },
+    data() {
+        return {
+        }
+    },
+    emits: ["term-search"],
+    methods: {
+        onTermChange(searchTerm) {
+            this.$emit("term-search", searchTerm)
+        }
+    }
 }
 </script>
 
@@ -9,7 +19,7 @@ export default {
     <header>
         <div class="container d-flex justify-content-between py-3">
             <h1>BOOLFLIX</h1>
-            <SearchName />
+            <SearchName @term-change="onTermChange" />
         </div>
     </header>
 </template>

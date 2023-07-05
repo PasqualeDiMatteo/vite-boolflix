@@ -1,11 +1,24 @@
-<script></script>
+<script>
+export default {
+    data() {
+        return {
+            searchTerm: ""
+        }
+    },
+    emits: ["term-change", "form-submit"]
+}
+
+</script>
 
 <template>
     <nav>
-        <div class="input-group ">
-            <input type="text" class="form-control" placeholder="Cerca...">
-            <button class="btn btn-outline-secondary" type="button">Button</button>
-        </div>
+        <form @submit.prevent="$emit('form-submit')">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Cerca..." v-model.trim="searchTerm"
+                    @keyup="$emit('term-change', searchTerm)">
+                <button class="btn btn-outline-secondary" type="submit">Button</button>
+            </div>
+        </form>
     </nav>
 </template>
 

@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       store,
+      searchName: ""
     }
   },
   methods: {
@@ -19,6 +20,9 @@ export default {
         store.movies = res.data.results
         console.log(res.data.results)
       })
+    },
+    filteredName(searchTerm) {
+      this.searchName = searchTerm
     }
   },
   created() {
@@ -29,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @term-search="filteredName" />
   <AppMain />
 </template>
 
