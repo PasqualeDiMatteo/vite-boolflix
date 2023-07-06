@@ -13,6 +13,10 @@ export default {
         getVote(vote) {
             const newVote = Math.ceil(vote / 2)
             return newVote
+        },
+        getImage(poster) {
+            if (poster === null) return
+            return this.url + poster
         }
     }
 }
@@ -26,12 +30,12 @@ export default {
             <div class="row row-cols-3">
                 <CardMain v-for="movie in store.movies" :key="movie.id" :title="movie.title"
                     :originalTitle="movie.original_title" :language="movie.original_language"
-                    :vote="getVote(movie.vote_average)" :img="this.url + movie.poster_path" />
+                    :vote="getVote(movie.vote_average)" :img="getImage(movie.poster_path)" />
             </div>
             <h2 v-if="store.tvSeries.length">TV Series</h2>
             <div class="row row-cols-3">
                 <CardMain v-for=" tv  in  store.tvSeries " :key="tv.id" :title="tv.name" :originalTitle="tv.original_name"
-                    :language="tv.original_language" :vote="getVote(tv.vote_average)" :img="this.url + tv.poster_path" />
+                    :language="tv.original_language" :vote="getVote(tv.vote_average)" :img="getImage(tv.poster_path)" />
             </div>
         </div>
     </main>

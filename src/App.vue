@@ -25,6 +25,11 @@ export default {
       this.searchName = searchTerm
     },
     onClickSubmit() {
+      if (!this.searchName) {
+        store.movies = [];
+        store.tvSeries = [];
+        return
+      }
       this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}&language=it-IT`, ["movies"])
       this.fetchMovie(`${endpoint}/tv?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}&language=it-IT`, ["tvSeries"])
 
