@@ -1,25 +1,34 @@
 <script>
+import { store } from "../../assets/data/store";
+
 export default {
+    data() {
+        return {
+            store,
+        }
+    },
     props: {
         title: String,
         originalTitle: String,
         language: String,
         vote: Number,
-        img: String
+        img: String,
+        actors: Array,
+        id: Number,
     },
     methods: {
         getImagePath(language) {
             const url = new URL(`../../assets/img/${language}.png`, import.meta.url)
             return url.href
-        }
-    }
+        },
+    }, emits: ["change-id"]
 }
 </script>
 
 
 
 <template>
-    <div class="col">
+    <div class="col" v-on:mouseenter="$emit('change-id', id)">
         <div class="my-card">
             <div class="image-card">
                 <img :src="img" :alt="title" class="img-fluid">
@@ -35,6 +44,9 @@ export default {
                     <i class="fa-regular fa-star" :class="{ 'fa-solid': vote > 4 }"></i>
                 </div>
                 <img :src="getImagePath(language)" :alt="language" class="language">
+                <ul>
+                    <li v-for="actor in actors">{{ actor.original_name }}</li>
+                </ul>
             </div>
         </div>
     </div>

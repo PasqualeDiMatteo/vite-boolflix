@@ -9,6 +9,7 @@ export default {
         }
     },
     components: { CardMain },
+    emits: ["id-changed", "hover-movie", "hover-tv"],
     methods: {
         getVote(vote) {
             const newVote = Math.ceil(vote / 2)
@@ -17,7 +18,14 @@ export default {
         getImage(poster) {
             if (poster === null) return
             return this.url + poster
-        }
+        },
+        getMinimizedActor() {
+            store.actorsMovies.splice(4, store.actorsMovies.length - 1)
+            return store.actorsMovies
+        },
+        onIdChange(id) {
+            this.$emit("id-changed", id);
+        },
     }
 }
 </script>
@@ -33,12 +41,14 @@ export default {
             <div class="row row-cols-3">
                 <CardMain v-for="movie in store.movies" :key="movie.id" :title="movie.title"
                     :originalTitle="movie.original_title" :language="movie.original_language"
-                    :vote="getVote(movie.vote_average)" :img="getImage(movie.poster_path)" />
+                    :vote="getVote(movie.vote_average)" :img="getImage(movie.poster_path)" :actors="getMinimizedActor()"
+                    :id="movie.id" @change-id="onIdChange" />
             </div>
-            <h2 v-if="store.tvSeries.length">TV Series</h2>
+            <h2 h2 v-if="store.tvSeries.length">TV Series</h2>
             <div class="row row-cols-3">
                 <CardMain v-for=" tv  in  store.tvSeries " :key="tv.id" :title="tv.name" :originalTitle="tv.original_name"
-                    :language="tv.original_language" :vote="getVote(tv.vote_average)" :img="getImage(tv.poster_path)" />
+                    :language="tv.original_language" :vote="getVote(tv.vote_average)" :img="getImage(tv.poster_path)"
+                    :actors="getMinimizedActor()" :id="tv.id" @change-id="onIdChange" />
             </div>
         </div>
     </main>
