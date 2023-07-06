@@ -30,6 +30,7 @@ export default {
 
 <style scoped lang="scss">
 header {
+    height: 80px;
     background-color: black;
 }
 

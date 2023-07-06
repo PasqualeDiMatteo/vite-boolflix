@@ -51,6 +51,8 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
+    border: 3px solid white;
+    box-shadow: 5px 5px 10px black;
 
     &:hover .card-body {
         background-color: rgba($color: #000000, $alpha: 0.9);

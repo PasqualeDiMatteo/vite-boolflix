@@ -43,7 +43,7 @@ export default {
 
 <style scoped lang="scss">
 main {
-    height: 90vh;
+    height: calc(100vh - 80px);
     background-color: #434343;
     overflow: auto;
 }
