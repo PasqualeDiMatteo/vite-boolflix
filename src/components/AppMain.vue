@@ -47,4 +47,9 @@ main {
     background-color: #434343;
     overflow: auto;
 }
+
+h2 {
+    color: white;
+    margin-top: 20px;
+}
 </style>

@@ -20,8 +20,8 @@ export default {
 
 <template>
     <header>
-        <div class="container d-flex justify-content-between py-3">
-            <h1>BOOLFLIX</h1>
+        <div class="container d-flex justify-content-between py-3 align-items-center">
+            <h1 class="m-0">BOOLFLIX</h1>
             <SearchName @term-change="onTermChange" @click-submit="searchTerm" />
         </div>
     </header>
@@ -30,7 +30,6 @@ export default {
 
 <style scoped lang="scss">
 header {
-    height: 10vh;
     background-color: black;
 }
 
