@@ -5,20 +5,26 @@ import axios from "axios"
 import AppHeader from "./components/AppHeader.vue"
 import AppMain from "./components/AppMain.vue"
 import { store } from "./assets/data/store"
+import AppLoader from "./components/AppLoader.vue"
+
 
 
 export default {
   data() {
     return {
       store,
-      searchName: ""
+      searchName: "",
+      isLoaded: false,
     }
   },
   methods: {
     fetchMovie(url, party) {
+      store.isLoaded = true
       axios.get(url).then(res => {
         store[party] = res.data.results
         console.log(res.data.results)
+        store.isLoaded = false
+
       })
     },
     filteredName(searchTerm) {
@@ -32,16 +38,16 @@ export default {
       }
       this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}&language=it-IT`, ["movies"])
       this.fetchMovie(`${endpoint}/tv?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}&language=it-IT`, ["tvSeries"])
-
     }
   },
-  components: { AppHeader, AppMain }
+  components: { AppHeader, AppMain, AppLoader }
 }
 </script>
 
 <template>
   <AppHeader @term-search="filteredName" @click-submit="onClickSubmit" />
   <AppMain />
+  <AppLoader />
 </template>
 
 

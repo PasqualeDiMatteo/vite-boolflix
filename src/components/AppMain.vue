@@ -25,7 +25,10 @@ export default {
 
 <template>
     <main>
-        <div class="container">
+        <div v-if="!store.movies.length || !store.tvSeries.length" class="background">
+            <h2 class="m-0 ">Cerca un film o Serie</h2>
+        </div>
+        <div class="container" v-else>
             <h2 v-if="store.movies.length">Movies</h2>
             <div class="row row-cols-3">
                 <CardMain v-for="movie in store.movies" :key="movie.id" :title="movie.title"
@@ -42,6 +45,22 @@ export default {
 </template>
 
 <style scoped lang="scss">
+.background {
+    height: 100%;
+    width: 100%;
+    background-image: url(../assets/img/1664271579476.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        background-color: black;
+        padding: 15px 30px;
+        color: red;
+    }
+}
+
 main {
     height: calc(100vh - 80px);
     background-color: #434343;
