@@ -45,8 +45,11 @@ export default {
       this.fetchMovie(`${endpoint}/tv?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}&language=it-IT`, ["tvSeries"])
     },
     onIdChanged(currentId) {
-      this.fetchCast(`https://api.themoviedb.org/3/movie/${currentId}/credits?api_key=c96a2f3b2de749ca0a2264917b319a40`);
-      this.fetchCast(`https://api.themoviedb.org/3/tv/${currentId}/credits?api_key=c96a2f3b2de749ca0a2264917b319a40`)
+      if (store.isMovie === true) {
+        this.fetchCast(`https://api.themoviedb.org/3/movie/${currentId}/credits?api_key=c96a2f3b2de749ca0a2264917b319a40`);
+      } if (store.isMovie === false) {
+        this.fetchCast(`https://api.themoviedb.org/3/tv/${currentId}/credits?api_key=c96a2f3b2de749ca0a2264917b319a40`)
+      }
     },
   },
   components: { AppHeader, AppMain, AppLoader }

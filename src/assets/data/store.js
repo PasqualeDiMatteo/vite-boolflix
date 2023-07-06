@@ -4,4 +4,5 @@ export const store = reactive({
   tvSeries: [],
   isLoaded: false,
   actorsMovies: [],
+  isMovie: true,
 });

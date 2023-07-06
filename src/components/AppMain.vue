@@ -42,13 +42,13 @@ export default {
                 <CardMain v-for="movie in store.movies" :key="movie.id" :title="movie.title"
                     :originalTitle="movie.original_title" :language="movie.original_language"
                     :vote="getVote(movie.vote_average)" :img="getImage(movie.poster_path)" :actors="getMinimizedActor()"
-                    :id="movie.id" @change-id="onIdChange" />
+                    :id="movie.id" @change-id="onIdChange" :isType="true" />
             </div>
             <h2 h2 v-if="store.tvSeries.length">TV Series</h2>
             <div class="row row-cols-3">
                 <CardMain v-for=" tv  in  store.tvSeries " :key="tv.id" :title="tv.name" :originalTitle="tv.original_name"
                     :language="tv.original_language" :vote="getVote(tv.vote_average)" :img="getImage(tv.poster_path)"
-                    :actors="getMinimizedActor()" :id="tv.id" @change-id="onIdChange" />
+                    :actors="getMinimizedActor()" :id="tv.id" @change-id="onIdChange" :isType="false" />
             </div>
         </div>
     </main>

@@ -15,12 +15,20 @@ export default {
         img: String,
         actors: Array,
         id: Number,
+        isType: Boolean,
+    }, computed: {
+        type() {
+            store.isMovie = this.isType
+        }
     },
     methods: {
         getImagePath(language) {
             const url = new URL(`../../assets/img/${language}.png`, import.meta.url)
             return url.href
         },
+        getType() {
+            this.type
+        }
     }, emits: ["change-id"]
 }
 </script>
@@ -28,7 +36,7 @@ export default {
 
 
 <template>
-    <div class="col" v-on:mouseenter="$emit('change-id', id)">
+    <div class="col" v-on:mouseenter="$emit('change-id', id), getType()">
         <div class="my-card">
             <div class="image-card">
                 <img :src="img" :alt="title" class="img-fluid">
