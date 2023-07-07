@@ -14,7 +14,6 @@ export default {
     return {
       store,
       searchName: "",
-
       isLoaded: false,
     }
   },
@@ -25,11 +24,6 @@ export default {
         store[party] = res.data.results
         console.log(res.data.results)
         store.isLoaded = false
-      })
-    },
-    fetchCast(url) {
-      axios.get(url).then(res => {
-        store.actorsMovies = res.data.cast
       })
     },
     filteredName(searchTerm) {
@@ -44,13 +38,6 @@ export default {
       this.fetchMovie(`${endpoint}/movie?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}&language=it-IT`, ["movies"])
       this.fetchMovie(`${endpoint}/tv?api_key=c96a2f3b2de749ca0a2264917b319a40&query=${this.searchName}&language=it-IT`, ["tvSeries"])
     },
-    onIdChanged(currentId) {
-      if (store.isMovie === true) {
-        this.fetchCast(`https://api.themoviedb.org/3/movie/${currentId}/credits?api_key=c96a2f3b2de749ca0a2264917b319a40`);
-      } if (store.isMovie === false) {
-        this.fetchCast(`https://api.themoviedb.org/3/tv/${currentId}/credits?api_key=c96a2f3b2de749ca0a2264917b319a40`)
-      }
-    },
   },
   components: { AppHeader, AppMain, AppLoader }
 }
@@ -58,7 +45,7 @@ export default {
 
 <template>
   <AppHeader @term-search="filteredName" @click-submit="onClickSubmit" />
-  <AppMain @id-changed="onIdChanged" />
+  <AppMain />
   <AppLoader />
 </template>
 

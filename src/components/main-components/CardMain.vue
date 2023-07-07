@@ -1,10 +1,13 @@
 <script>
 import { store } from "../../assets/data/store";
+import axios from "axios"
+
 
 export default {
     data() {
         return {
             store,
+            listActors: null
         }
     },
     props: {
@@ -15,11 +18,11 @@ export default {
         img: String,
         actors: Array,
         id: Number,
-        isType: Boolean,
+        types: String,
     }, computed: {
         type() {
-            store.isMovie = this.isType
-        }
+            return store.isMovie = this.isType
+        },
     },
     methods: {
         getImagePath(language) {
@@ -28,15 +31,26 @@ export default {
         },
         getType() {
             this.type
-        }
-    }, emits: ["change-id"]
+        },
+        fetchCast(url) {
+            axios.get(url).then(res => {
+                store.actorsMovies = res.data.cast
+            })
+        },
+    }, emits: ["change-id"],
+    mounted() {
+        axios.get(`https://api.themoviedb.org/3/${this.types}/${this.id}/credits?api_key=c96a2f3b2de749ca0a2264917b319a40`).then(res => {
+            this.listActors = res.data.cast
+            this.listActors.splice(5, this.listActors.length - 1)
+        });
+    },
 }
 </script>
 
 
 
 <template>
-    <div class="col" v-on:mouseenter="$emit('change-id', id), getType()">
+    <div class="col">
         <div class="my-card">
             <div class="image-card">
                 <img :src="img" :alt="title" class="img-fluid">
@@ -53,7 +67,7 @@ export default {
                 </div>
                 <img :src="getImagePath(language)" :alt="language" class="language">
                 <ul>
-                    <li v-for="actor in actors">{{ actor.original_name }}</li>
+                    <li v-for="actor in listActors" :key="actor">{{ actor.original_name }}</li>
                 </ul>
             </div>
         </div>
