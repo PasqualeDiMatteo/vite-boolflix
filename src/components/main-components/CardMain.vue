@@ -16,7 +16,6 @@ export default {
         language: String,
         vote: Number,
         img: String,
-        actors: Array,
         id: Number,
         types: String,
     },
