@@ -19,18 +19,11 @@ export default {
         actors: Array,
         id: Number,
         types: String,
-    }, computed: {
-        type() {
-            return store.isMovie = this.isType
-        },
     },
     methods: {
         getImagePath(language) {
             const url = new URL(`../../assets/img/${language}.png`, import.meta.url)
             return url.href
-        },
-        getType() {
-            this.type
         },
         fetchCast(url) {
             axios.get(url).then(res => {
